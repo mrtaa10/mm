@@ -1,0 +1,35 @@
+let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+function displayNotes() {
+    const list = document.getElementById("notesList");
+    list.innerHTML = "";
+
+    notes.forEach((note, index) => {
+        let li = document.createElement("li");
+        li.innerHTML = 
+            ${note}
+            <span class="delete" onclick="deleteNote(${index})">❌</span>
+        ;
+        list.appendChild(li);
+    });
+}
+
+function addNote() {
+    const input = document.getElementById("noteInput");
+    if (input.value === "") return;
+
+    notes.push(input.value);
+    localStorage.setItem("notes", JSON.stringify(notes));
+    input.value = "";
+
+    displayNotes();
+}
+
+function deleteNote(index) {
+    notes.splice(index, 1);
+    localStorage.setItem("notes", JSON.stringify(notes));
+    displayNotes();
+}
+
+// تشغيل عند فتح الصفحة
+displayNotes();
