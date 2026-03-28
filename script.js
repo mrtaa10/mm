@@ -16,7 +16,10 @@ function displayNotes() {
 
 function addNote() {
     const input = document.getElementById("noteInput");
-    if (input.value === "") return;
+if (input.value.trim() === "") {
+    alert;
+    return;
+}
 
     notes.push(input.value);
     localStorage.setItem("notes", JSON.stringify(notes));
